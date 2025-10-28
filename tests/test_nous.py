@@ -8,4 +8,4 @@ def test_plugin_is_installed():
         pass
         
     names = [mod.__name__ for mod in pm.get_plugins()]
-    assert "llm_deepseek" in names
+    assert "llm_nous" in names
