@@ -10,56 +10,55 @@ except ImportError:
     HAS_ASYNC = False
 
 MODELS = (
-    "deepseek-chat",
-    "deepseek-coder",
-    "deepseek-reasoner",
+    "Hermes-4-405B",
+    "Hermes-4-70B"
 )
 
 
-class DeepSeekChat(Chat):
-    needs_key = "deepseek"
-    key_env_var = "LLM_DEEPSEEK_KEY"
+class NousChat(Chat):
+    needs_key = "nous"
+    key_env_var = "NOUS_API_KEY"
 
     def __init__(self, model_name):
         super().__init__(
             model_name=model_name,
             model_id=model_name,
-            api_base="https://api.deepseek.com",
+            api_base="https://inference-api.nousresearch.com/v1",
         )
 
     def __str__(self):
-        return "DeepSeek: {}".format(self.model_id)
+        return "Nous: {}".format(self.model_id)
 
 
 # Only define AsyncChat class if async support is available
 if HAS_ASYNC:
 
-    class DeepSeekAsyncChat(AsyncChat):
-        needs_key = "deepseek"
-        key_env_var = "LLM_DEEPSEEK_KEY"
+    class NousAsyncChat(AsyncChat):
+        needs_key = "nous"
+        key_env_var = "NOUS_API_KEY"
 
         def __init__(self, model_name):
             super().__init__(
                 model_name=model_name,
                 model_id=model_name,
-                api_base="https://api.deepseek.com",
+                api_base="https://inference-api.nousresearch.com/v1",
             )
 
         def __str__(self):
-            return "DeepSeek: {}".format(self.model_id)
+            return "Nous: {}".format(self.model_id)
 
 
 @llm.hookimpl
 def register_models(register):
     # Only do this if the key is set
-    key = llm.get_key("", "deepseek", DeepSeekChat.key_env_var)
+    key = llm.get_key("", "nous", NousChat.key_env_var)
     if not key:
         return
     for model_id in MODELS:
         if HAS_ASYNC:
             register(
-                DeepSeekChat(model_id),
-                DeepSeekAsyncChat(model_id),
+                NousChat(model_id),
+                NousAsyncChat(model_id),
             )
         else:
-            register(DeepSeekChat(model_id))
+            register(NousChat(model_id))
