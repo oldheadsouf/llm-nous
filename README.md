@@ -5,7 +5,7 @@
 [![Tests](https://github.com/oldheadsouf/llm-nous/actions/workflows/test.yml/badge.svg)](https://github.com/oldheadsouf/llm-nous/actions/workflows/test.yml)
 [![License](https://img.shields.io/badge/license-Apache%202.0-blue.svg)](https://github.com/oldheadsouf/llm-nous/blob/main/LICENSE)
 
-Access [nouseresearch.com](https://nousresearch.com/) Hermes models via API
+Access [nouseresearch.com](https://nousresearch.com/) Hermes models via [simonw's llm cli](https://github.com/simonw/llm)
 
 ## Installation
 
